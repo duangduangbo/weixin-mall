@@ -1,5 +1,5 @@
 <template>
-    <x-button  class="c-btn" :plain="plain" :type="type" :text="text" :disabled="disabled" :mini="mini" :link="link"></x-button>
+    <x-button style="border-width:1px;" class="c-btn" :plain="plain" :type="type" :text="text" :disabled="disabled" :mini="mini" :link="link"></x-button>
 </template>
 
 <script>

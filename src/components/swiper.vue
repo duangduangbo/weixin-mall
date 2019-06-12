@@ -20,17 +20,17 @@ import { Swiper } from 'vux'
 
 const baseList = [{
   url: 'javascript:',
-  img: require("@/assets/images/首页banner.png"),
+  img: require("@/assets/images/banner.png"),
   title: ''
 }, {
   url: 'javascript:',
-  img: require("@/assets/images/首页banner.png"),
+  img: require("@/assets/images/banner.png"),
   title: ''
 }, {
   url: 'javascript:',
-  img: require("@/assets/images/首页banner.png"), 
+  img: require("@/assets/images/banner.png"), 
   title: '',
-  fallbackImg: require("@/assets/images/首页banner.png")//404
+  fallbackImg: require("@/assets/images/banner.png")//404
 }]
 
 

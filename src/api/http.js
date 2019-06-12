@@ -1,16 +1,21 @@
 import Vue from 'vue'
 import axios from 'axios'; // 引入axios
 import QS from 'qs'; // 引入qs模块，用来序列化post类型的数据
-import  { ToastPlugin,Toast,AlertPlugin  } from 'vux'
-import { setToken, getToken,getInvitation,setInvitation,getCode,setCode } from '../libs/util'
+import  { ToastPlugin,Toast,AlertPlugin,LoadingPlugin   } from 'vux'
+import { setToken, getToken,
+  setDistributorId,getInvitation,
+  setInvitation,getCode,setCode,
+  setInvitationCode
+ } from '../libs/util'
 
 Vue.use(Toast)
 Vue.use(ToastPlugin)
 Vue.use(AlertPlugin )
+Vue.use(LoadingPlugin)
 var instance = axios.create({
     //  设置请求前置路径
     baseURL: process.env.API_ROOT,
-    timeout: 20000,
+    timeout: 60000,
     // 设置允许携带cookie
     withCredentials:false
   });
@@ -21,7 +26,7 @@ var instance = axios.create({
   // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-  
+    Vue.$vux.loading.show()
     /* 添加loading S */
    // startLoading()
     /* 添加loading E */
@@ -39,24 +44,36 @@ instance.interceptors.request.use(function (config) {
 
   // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
+  // 隐藏
+      Vue.$vux.loading.hide()
     // 对响应数据做点什么
     if(response.data.code<1){
-      if(response.data.code == -3){
-        // Vue.$vux.alert.show({
-        //   title: '错误',
-        //   content: '登录过期，请重新登录',
-        //   buttonText:"重新登录",
-        //   onHide () {
-        //     setToken("")
-        //     setInvitation("")
-        //    window.location.href="/"
-        //   }
-        // })
-        Vue.$vux.toast.show({
-          text:response.data.msg,
-          time:2000,
-          type:'warn',
-          width:'2.7rem'
+      if(response.data.code == -4){
+        Vue.$vux.alert.show({
+          title: '错误',
+          content: '登录过期，请重新登录',
+          buttonText:"重新登录",
+          onHide () {
+            setToken("")
+            setInvitation("")
+            setInvitationCode("")
+            setDistributorId(0)
+            window.location.href="/user"
+          }
+        })
+      }
+      else if(response.data.msg.indexOf("用户不在线")>-1){
+        Vue.$vux.alert.show({
+          title: '错误',
+          content: '登录过期，请重新登录',
+          buttonText:"重新登录",
+          onHide () {
+            setToken("")
+            setInvitation("")
+            setInvitationCode("")
+            setDistributorId(0)
+           window.location.href="/user"
+          }
         })
       }
       else{
@@ -75,16 +92,20 @@ instance.interceptors.response.use(function (response) {
     // 对响应错误做点什么
   
     /* 关闭loading S */
-   // endLoading()
+    Vue.$vux.loading.hide()
+    Vue.$vux.toast.show({
+      text:"服务器出错",
+      time:2000,
+      type:'warn',
+      width:'2.7rem'
+    })
     /* 关闭loading E */
-    console.log(error)
     return Promise.reject(error)
   })
 
   var httpRequest = {
     // get请求
     get (url, params) {
-      console.log("get",QS.stringify(params))
       return new Promise((resolve, reject) => {
         instance({
           method: 'get',
@@ -101,14 +122,12 @@ instance.interceptors.response.use(function (response) {
             type:'warn',
             width:'2.7rem'
           })
-          console.log('请求失败')
           reject(err)
         })
       })
     },
     // post请求
     post (url, data) {
-      console.log("post",data)
       return new Promise((resolve, reject) => {
         instance({
           method: 'post',
@@ -126,17 +145,6 @@ instance.interceptors.response.use(function (response) {
             type:'warn',
             width:'2.7rem'
           })
-          // Vue.$vux.alert.show({
-          //   title: '错误提示',
-          //   content: '请求失败',
-          //   onShow () {
-          //     console.log('Plugin: I\'m showing')
-          //   },
-          //   onHide () {
-          //     console.log('Plugin: I\'m hiding')
-          //   }
-          // })
-          console.log('请求失败')
           reject(err)
         })
       })

@@ -115,7 +115,7 @@ export default {
             width: 231px;
             height: 62px;
             background-color: #ffffff;
-            border: solid 1px #afafaf;
+            border: solid 1PX #afafaf;
             padding:0 20px;
             margin:0 20px;
             font-size:25px;
@@ -125,7 +125,7 @@ export default {
             display: inline-block;
             width: 19px;
             height: 2px;
-            border: solid 1px #afafaf;
+            border: solid 1PX #afafaf;
             vertical-align: middle;
         }
     }

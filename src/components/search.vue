@@ -76,9 +76,10 @@ export default {
 //search
 .c-search{
   padding:10px;
+  background: #fff;
   .serch-span{
     font-size: 28px;
-    line-height: 50px;
+    line-height: 60px;
   }
     .weui-icon-search{
     color:#4d4d4d;
@@ -107,6 +108,7 @@ export default {
     }
     .weui-search-bar__label{
         background:#f1f1f1;
+        top:10px;
     }
     
     .weui-search-bar:after{

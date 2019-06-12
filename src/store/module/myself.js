@@ -7,6 +7,7 @@ import {
   collect,
   collectRemove,
   collectAdd,
+  iscollect
 } from '@/api/api';
 import { setToken, getToken ,getHour24} from '@/libs/util'
 const state = {
@@ -75,7 +76,7 @@ const actions = {
   },
   // 购物车更新
   getshopcarUpdate({ commit },  p) {
-    p=Object.assign(p,{userToken:getToken()})
+    p=Object.assign({shopCar:p},{userToken:getToken()})
     return new Promise((resolve, reject) => {
       shopcarUpdate(p).then(res => {
         const data = res.data
@@ -111,12 +112,36 @@ const actions = {
       })
     })
   },
+  // 取消收藏
+  cancelcollectRemove({ commit,state }, p) {
+    p={userToken:getToken(),string:p}
+    return new Promise((resolve, reject) => {
+      collectRemove(p).then(res => {
+        const data = res.data
+        resolve(data)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   // 收藏夹添加
   getcollectAdd({ commit }, p={userToken:getToken()}) {
     p=Object.assign({collect:p},{userToken:getToken()})
     console.log(p)
     return new Promise((resolve, reject) => {
       collectAdd(p).then(res => {
+        const data = res.data
+        resolve(data)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+   // 是否已收藏
+   iscollect({ commit }, p={userToken:getToken()}) {
+    p=Object.assign(p,{userToken:getToken()})
+    return new Promise((resolve, reject) => {
+      iscollect(p).then(res => {
         const data = res.data
         resolve(data)
       }).catch(err => {

@@ -19,7 +19,7 @@ exports.cssLoaders = function (options) {
     loader: 'css-loader',
     options: {
       sourceMap: options.sourceMap,
-      importLoaders:2
+      importLoaders:3
     }
   }
   var px2remLoader = {

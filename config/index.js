@@ -3,13 +3,15 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+const BASE_URL = process.env.NODE_ENV === 'production'
+  ? '/user/'
+  : '/'
 module.exports = {
   dev: {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: BASE_URL,
     // proxyTable: {
     //   '/api':{
     //     target:'http://192.168.5.44:8080',
@@ -57,7 +59,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: BASE_URL,
 
     /**
      * Source Maps

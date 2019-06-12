@@ -2,8 +2,9 @@
     <div>
         <flexbox :gutter="gutter" :orient="orient" class="c-flexbox">
             <flexbox-item>
-            <div  @click="clickToDetails" class="c-img-main" :style="{backgroundImage:'url('+ goodsList.picurl +')'}">
-                
+            <div  @click="clickToDetails">
+                <x-img :src="goodsList.picurl" :default-src="picurl"
+                    class="c-img-main" ></x-img>
             </div>
             </flexbox-item>
             <flexbox-item>
@@ -31,14 +32,14 @@
 
 <script>
 // 首页大图文
-import { Flexbox, FlexboxItem } from 'vux'
+import { Flexbox, FlexboxItem,XImg } from 'vux'
 import ButtonC from '@/components/basic/buttonC.vue'
 import LoadAlert from '@/components/dialog/loanAlert.vue'
 import { mapState } from 'vuex'
 import ButtonByLoan from '@/components/basic/buttonByLoan.vue'
 import ButtonByBuy from '@/components/basic/buttonByBuy.vue'
 let list={
-    picurl:require("@_a/images/首页banner.png"),
+    picurl:require("@_a/images/banner.png"),
     name:"ELBE锂电采茶机",
     price:1233
 }
@@ -50,10 +51,12 @@ export default {
         ButtonC,
         LoadAlert,
         ButtonByLoan,
-        ButtonByBuy
+        ButtonByBuy,
+        XImg
     },
     data(){
         return {
+            picurl:require("@_a/images/error.jpg"),
         }
     },
     props:{

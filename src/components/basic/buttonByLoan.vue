@@ -1,6 +1,6 @@
 <template>
 <div class="btn-by-loan">
-    <x-button class="c-btn" :plain="plain" :type="type" :text="text" :disabled="disabled" :mini="mini" :link="link"  @click.native="clickLoan"></x-button>
+    <x-button class="c-btn" :plain="plain" :type="type" style="border-width:1px;" :text="text" :disabled="disabled" :mini="mini" :link="link"  @click.native="clickLoan"></x-button>
             <load-alert  :money="goodsList.deposit" :goodsMsg="goodsList"></load-alert>
 </div>
 </template>

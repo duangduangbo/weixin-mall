@@ -1,5 +1,5 @@
 <template>
-    <x-button  @click.native="clickBuy" class="c-btn" :plain="plain" :type="type" :text="text" :disabled="disabled" :mini="mini" :link="link"></x-button>
+    <x-button  @click.native="clickBuy" style="border-width:1px;" class="c-btn" :plain="plain" :type="type" :text="text" :disabled="disabled" :mini="mini" :link="link"></x-button>
 </template>
 
 <script>

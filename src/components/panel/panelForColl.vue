@@ -32,7 +32,12 @@
              @click.native="getChecked(checkedOne)"
              ></check-icon>
         </div>
-        <div class="c-img-main" @click="clickToDetails" :style="{backgroundImage:'url('+goodsList.picurl+')'}">
+        <div style="display:inline-block;"
+         @click="clickToDetails"
+          >
+          <!-- :style="{backgroundImage:'url('+goodsList.picurl+')'}" -->
+          <x-img :src="goodsList.picurl" :default-src="picurl"
+                    class="c-img-main" ></x-img>
         </div>
         <div class="c-content">
             <span class="c-title" @click="clickToDetails">{{goodsList.name}}</a></span>
@@ -70,7 +75,7 @@
 
 <script>
 // 收藏管理图文
-import { Flexbox, FlexboxItem,CheckIcon } from 'vux'
+import { Flexbox, FlexboxItem,CheckIcon ,XImg} from 'vux'
 import ButtonC from '@/components/basic/buttonCL.vue'
 import ButtonByLoan from '@/components/basic/buttonByLoan.vue'
 import ButtonByBuy from '@/components/basic/buttonByBuy.vue'
@@ -83,11 +88,13 @@ export default {
         ButtonC,
         CheckIcon,
         ButtonByLoan,
+        XImg,
         ButtonByBuy
     },
     data(){
         return {
-            checkedOne:this.checked
+            checkedOne:this.checked,
+            picurl:require("@_a/images/error.jpg"),
         }
     },
     props:{

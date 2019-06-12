@@ -21,6 +21,7 @@
     "qs": "^6.7.0",
     "request": "^2.88.0",
     "vue": "^2.5.2",
+    "vue-jsonp": "^0.1.8",
     "vue-router": "^3.0.1",
     "vuex-i18n": "^1.11.0",
     "weixin-js-sdk": "^1.4.0-test"

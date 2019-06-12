@@ -1,6 +1,6 @@
 <template>
    <tabbar class="footer">
-      <tabbar-item v-for= "item in footerList" :key="item.name" :show-dot="item.show_dot" :selected="item.selected" :link="item.link" :badge="item.badge" @on-item-click="footerItem">
+      <tabbar-item v-for= "item in getfooterList" :key="item.name" :show-dot="item.show_dot" :selected="item.selected" :link="item.link" :badge="item.badge" @on-item-click="footerItem">
         <i slot="icon" :class="item.imgUrl"></i>
         <span slot="label">{{item.name}}</span>
       </tabbar-item>
@@ -28,6 +28,9 @@ export default {
     ...mapState([
       'footerList'
     ]),
+    ...mapGetters([
+      'getfooterList'
+    ])
   },
   created() {
     // this.handleChangeFooter(0)

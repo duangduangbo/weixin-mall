@@ -3,8 +3,9 @@
         <flexbox :gutter="gutter" :orient="orient" class="c-flexbox">
             <flexbox-item>
                 <!-- 商品图 -->
-            <div  @click="clickToDetails" class="c-img-main" :style="{backgroundImage:'url('+goodsList.picurl+')'}">
-                
+            <div  @click="clickToDetails" >
+                  <x-img :src="goodsList.picurl" :default-src="picurl"
+                    class="c-img-main" ></x-img>
             </div>
             </flexbox-item>
             <flexbox-item>
@@ -54,7 +55,7 @@
 
 <script>
 // 首页小图文
-import { Flexbox, FlexboxItem } from 'vux'
+import { Flexbox, FlexboxItem ,XImg} from 'vux'
 import ButtonCL from '@/components/basic/buttonCL.vue'
 import ButtonByLoan from '@/components/basic/buttonByLoan.vue'
 import ButtonByBuy from '@/components/basic/buttonByBuy.vue'
@@ -70,10 +71,12 @@ export default {
         ButtonCL,
         LoadAlert,
         ButtonByLoan,
-        ButtonByBuy
+        ButtonByBuy,
+        XImg
     },
     data(){
         return {
+            picurl:require("@_a/images/error.jpg"),
         }
     },
     props:{
@@ -88,7 +91,7 @@ export default {
         },
         goodsList:{
             default:()=>({
-                picurl:require("@_a/images/首页banner.png"),
+                picurl:require("@_a/images/banner.png"),
                 name:"ELBE锂电采茶机",
                 price:1233
             })
@@ -98,7 +101,6 @@ export default {
         }
     },
     mounted(){
-        console.log(this.goodsList)
     },
     methods:{
         clickToDetails(){

@@ -2,7 +2,9 @@
     <div class="panel-for-hot">
         <flexbox :gutter="0" orient="horizontal" class="c-line">
             <flexbox-item :span="4/10">
-            <div class="c-img-main" :style="{backgroundImage:'url('+goodsList.picurl+')'}">
+            <div class="c-img-main"  :style="{backgroundImage:'url('+goodsList.picurl+')'}">
+                <x-img :src="goodsList.picurl" :default-src="picurl"
+                    class="c-img-main" ></x-img>
             </div>
             </flexbox-item>
             <flexbox-item :span="6/10">
@@ -25,7 +27,7 @@
 
 <script>
 // 热卖图文
-import { Flexbox, FlexboxItem } from 'vux'
+import { Flexbox, FlexboxItem,XImg } from 'vux'
 import ButtonC from '@/components/basic/buttonCL.vue'
 import ButtonByBuy from '@/components/basic/buttonByBuy'
 export default {
@@ -34,13 +36,15 @@ export default {
         Flexbox,
         FlexboxItem,
         ButtonC,
-        ButtonByBuy
+        ButtonByBuy,
+        XImg
     },
     data(){
         return {
             btn_buy_type: 'primary',
             btn_buy_text:'立即购买',
-            style:{}
+            style:{},
+            picurl:require("@_a/images/error.jpg"),
         }
     },
     props:{

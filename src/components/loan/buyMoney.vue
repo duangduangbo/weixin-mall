@@ -2,7 +2,7 @@
     <div class="buy-money">
         <div class="loan-cell">
             <div class="loan-cell-title">总金额：</div>
-            <div class="loan-cell-money">{{money}}</div>
+            <div class="loan-cell-money">{{Number(money).toFixed(2)}}</div>
             <!-- <div class="loan-cell-des">备注 : 租金仅供租赁机械</div> -->
         </div>
     </div>
@@ -16,6 +16,7 @@ export default {
     },
     props:{
         money:{
+            default:0,
             type:[String,Number]
         }
     },

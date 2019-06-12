@@ -1,29 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/home.vue'//首页
-import Myself from '@/views/myself.vue'//个人中心
-import Mall from '@/views/mall.vue'//商城
-import New from '@/views/new.vue'//新品
-import Hot from '@/views/hot.vue'//热卖
-import Loan from '@/views/loan.vue'//租赁
-import Collect from '@/views/collect.vue'//收藏
-import Shopcar from '@/views/shopcar.vue'//购物车
-import GoodsDetails from '@/views/goodsdetails.vue'//商品详情
-import Order from '@/views/order.vue'//订单
-import Address from '@/views/address.vue'//收获地址
-import NewAddress from '@/views/newAddress.vue'//添加新收获地址
-import SureOrder from '@/views/sureorder.vue'//确认订单
-import SureOrderForCar from '@/views/sureorderForCar.vue'//购物车确认订单
-import SureLoan from '@/views/sureloan.vue'//确认租赁
-import InvitationCode from '@/views/invitation-code.vue'//邀请码
-import Goods from '@/views/goods.vue'//通用商品页
-import OrderDetails from '@/views/order-details.vue'//订单详情
-import OrderJudge from '@/views/order-judge.vue'//订单评价
-import cancelOrder from '@/views/cancel-order.vue'//取消订单原因
+import Home from '@/views/home/home.vue'//首页
+import Myself from '@/views/mycenter/myself.vue'//个人中心
+import Mall from '@/views/mall/mall.vue'//商城
+import New from '@/views/mall/new.vue'//新品
+import Hot from '@/views/mall/hot.vue'//热卖
+import Loan from '@/views/mall/loan.vue'//租赁
+import Collect from '@/views/collect/collect.vue'//收藏
+import Shopcar from '@/views/shopcar/shopcar.vue'//购物车
+import GoodsDetails from '@/views/goodsdetails/goodsdetails.vue'//商品详情
+import Order from '@/views/order/order.vue'//订单
+import Address from '@/views/address/address.vue'//收获地址
+import NewAddress from '@/views/address/newAddress.vue'//添加新收获地址
+import SureOrder from '@/views/sureorder/sureorder.vue'//确认订单
+import SureOrderForCar from '@/views/sureorder/sureorderForCar.vue'//购物车确认订单
+import SureLoan from '@/views/sureloan/sureloan.vue'//确认租赁
+import InvitationCode from '@/views/login/invitation-code.vue'//邀请码
+import Goods from '@/views/goods/goods.vue'//通用商品页
+import OrderDetails from '@/views/orderdetails/order-details.vue'//订单详情
+import OrderJudge from '@/views/order-judge/order-judge.vue'//订单评价
+import cancelOrder from '@/views/cancel-order/cancel-order.vue'//取消订单原因
 
 Vue.use(Router)
 export default new Router({
   mode: 'history',
+  base:'/user/',
   routes: [
     {
       path: '/',

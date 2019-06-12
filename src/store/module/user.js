@@ -1,8 +1,8 @@
 import { usersigup,
-  userlogin,
   userlogout,
   getinvitation,
-  noinvitationcode
+  noinvitationcode,
+  isout
  } from '@/api/api';
 import { setToken, getToken,setInvitation,getInvitation } from '@/libs/util'
 const state = {
@@ -15,33 +15,7 @@ const state = {
 }
 
 const actions = {
-  getusersigup ({ commit }, p) {
-    return new Promise((resolve, reject) => {
-      usersigup(p).then(res => {
-        const data = res.data
-        resolve(data)
-      }).catch(err => {
-        reject(err)
-      })
-    })
-  },
-  getuserlogin ({ commit }, { openID, ip }) {
-    return new Promise((resolve, reject) => {
-      userlogin({
-        openID:123,
-        ip:123
-      }).then(res => {
-        const data = res.data
-        commit('setToken', data.userToken)
-        commit('setUserid', data.id)
-        commit('setDistributor', data.distributor)
-        console.log(data.userToken)
-        resolve(data)
-      }).catch(err => {
-        reject(err)
-      })
-    })
-  },
+
   getuserlogout ({ commit }, p) {
     return new Promise((resolve, reject) => {
       userlogout({
@@ -71,9 +45,21 @@ const actions = {
   getnoinvitationcode ({ commit }, p) {
     return new Promise((resolve, reject) => {
       noinvitationcode({
-        userToken:getToken(),
+        userToken:getToken()
       }).then(res => {
-        const data = res.data
+        const data = res
+        resolve(data)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  isout ({ commit }, p) {
+    return new Promise((resolve, reject) => {
+      isout({
+        userToken:getToken()
+      }).then(res => {
+        const data = res
         resolve(data)
       }).catch(err => {
         reject(err)

@@ -1,0 +1,154 @@
+<template>
+<div class="goods-details">
+    <div class="mall-top">
+      <header-c :title="headerTitle">
+      </header-c>
+    </div>
+    <div class="mall-center">
+      <div class="goods-panel">
+        <p-for-goods-details :goodsDetails="goodsDetails"></p-for-goods-details>
+      </div>
+      <div class="goods-grade">
+        <div id="detailsTag">
+        <goods-details-tag :class="searchBarFixed == true ? 'isFixed' :''"></goods-details-tag>
+        </div>
+        <div v-show="isShow==1" v-for="(k,i) in ariseList" :key="i">
+        <goods-judge :ariseList="k"></goods-judge>
+        </div>
+        <div class="tip-nomessage" v-show="isShow==1&&ariseList.length<1">
+          暂无评价
+        </div>
+        <goods-details v-show="isShow==0"  :goodsDetails="goodsDetails"></goods-details>
+      </div>
+    </div>
+    <div class="mall-footer">
+        <goods-details-footer  
+        class="goods-footer" 
+        @doCollect="collectChange" 
+        :collectId="collectId" 
+        :goodsDetails="goodsDetails" 
+        :collected="collect">
+        </goods-details-footer>
+    </div>
+</div>
+</template>
+<script>
+import { Flexbox, FlexboxItem } from "vux";
+import HeaderC from "@/components/header";
+import pForGoodsDetails from "./components/pForGoodsDetails";
+import goodsDetails from "./components/goodsDetails";
+import goodsDetailsFooter from "./components/goodsDetailsFooter";
+import goodsDetailsTag from "./components/goodsDetailsTag";
+import goodsJudge from "./components/goodsJudge";
+import { mapState, mapGetters, mapActions } from "vuex";
+export default {
+  name: "goodsdetails",
+  components: {
+    HeaderC,
+    Flexbox,
+    FlexboxItem,
+    pForGoodsDetails,
+    goodsJudge,
+    goodsDetailsTag,
+    goodsDetailsFooter,
+    goodsDetails
+  },
+  data() {
+    return {
+      headerTitle: "商品详情",
+      offsetTop: 0,
+      searchBarFixed: false,
+      ariseList: [],
+      id: this.$route.query.id,
+      goodsDetails: {},
+      collect: false,
+      collectId: ""
+    };
+  },
+  created() {},
+
+  mounted() {
+    let self = this;
+    this.getShopData();
+    this.getGoodsCollect();
+    this.$store.commit("updateTagType", "0");
+    document
+      .querySelector("#vux_view_box_body")
+      .addEventListener("scroll", self.handleScroll, false);
+  },
+  destroyed() {
+    let self = this;
+    document
+      .querySelector("#vux_view_box_body")
+      .removeEventListener("scroll", self.handleScroll, false); // 离开页面 关闭监听 不然会报错
+  },
+  methods: {
+    handleScroll() {
+      this.offsetTop =
+        document.querySelector("#detailsTag").offsetTop -
+        document.querySelector(".mall-top").offsetHeight;
+      this.searchBarFixed =
+        document.querySelector("#vux_view_box_body").scrollTop >= this.offsetTop
+          ? true
+          : false;
+    },
+    ...mapActions(["getappraise", "getselectcommoditybyid", "iscollect"]),
+    getShopData() {
+      this.getselectcommoditybyid(this.id).then(res => {
+        this.goodsDetails = res[0];
+      });
+      this.getappraise({ string: this.id }).then(res => {
+        this.ariseList = res;
+      });
+    },
+    getGoodsCollect() {
+      this.iscollect({ string: this.id }).then(res => {
+        if (res!=null&&res.id) {
+          this.collect = true;
+          this.collectId = res.id;
+        } else {
+          this.collect = false;
+        }
+      });
+    },
+    collectChange() {
+      this.getGoodsCollect();
+    }
+  },
+  computed: {
+    ...mapGetters({
+      isShow: "getTagType"
+    })
+  }
+};
+</script>
+<style lang="less">
+.goods-details {
+  .mall-top {
+    background-color: @bg-color;
+  }
+  .mall-center {
+  }
+  .goods-panel {
+    padding: 0 25px;
+    background-color: @bg-color;
+  }
+  .mall-footer {
+    height: 114px;
+  }
+  .goods-footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+  }
+  .goods-grade {
+    margin: 15px 0;
+    .isFixed {
+      position: fixed;
+      top: 90px;
+      z-index: 999;
+      width: 100%;
+    }
+  }
+}
+</style>

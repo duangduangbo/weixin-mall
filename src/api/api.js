@@ -4,6 +4,8 @@ import httpRequest from './http'
 export const getwxuserinfo= p => httpRequest.post('/wxuserinfo', p)
 // 上传code
 export const getauthorize= p => httpRequest.post('/authorize', p)
+// 凭证是否过期
+export const isout= p => httpRequest.post('/user/isout', p)
 // 填写邀请码
 export const getinvitation= p => httpRequest.post('/addinvitationcode', p)
 // 无邀请码登录
@@ -81,6 +83,8 @@ export const collect= p => httpRequest.post('/usercenter/collect', p)
 export const collectRemove= p => httpRequest.post('/usercenter/collect/remove', p)
 // 加入收藏夹
 export const collectAdd= p => httpRequest.post('/usercenter/collect/add', p)
+// 是否收藏
+export const iscollect= p => httpRequest.post('/usercenter/collect/iscollect', p)
 // 商品评论
 export const appraise= p => httpRequest.post('/usercenter/appraise', p)
 // 我的评论
